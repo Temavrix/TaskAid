@@ -21,6 +21,7 @@ export default function CalendarPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [completedDates, setCompletedDates] = useState<Set<string>>(new Set());
+  const [isOpen, setIsOpen] = useState(false);
   const token = localStorage.getItem("token");
 
   // Redirect if not logged in
@@ -68,41 +69,54 @@ export default function CalendarPage() {
   };
 
   const handleToDo = () => {
-    navigate("/dashboard");
+    navigate("/ToDo");
+  };
+
+  const handleNotes = () => {
+    navigate("/notes");
   }
 
   return (
-    <div className="h-screen flex bg-neutral-100">
-      {/* Sidebar */}
-      <div className="w-64 bg-neutral-800 text-white flex flex-col justify-between">
+    <div className="h-screen flex bg-neutral-600">
+
+      <div className={`fixed top-0 left-0 h-full bg-neutral-800 text-white flex flex-col justify-between transform transition-transform duration-300 z-40
+          ${isOpen ? "translate-x-0 w-64" : "-translate-x-full w-50"} lg:translate-x-0 lg:w-64`}>
         <div>
           <h2 className="text-2xl font-bold p-4">TaskAid</h2>
           <nav className="flex flex-col gap-2 p-4">
             <button onClick={handleToDo} className="px-3 py-2 rounded-lg bg-neutral-700 hover:bg-neutral-600 text-left">
-              To-Do List
+              To-Dos
+            </button>
+            <button onClick={handleNotes} className="px-3 py-2 rounded-lg bg-neutral-700 hover:bg-neutral-600 text-left">
+              Notes
             </button>
             <button className="px-3 py-2 rounded-lg bg-neutral-700 hover:bg-neutral-600 text-left">
-              Calander
+              Calendar
             </button>
           </nav>
         </div>
         <div className="p-4">
-          <button
-            onClick={handleLogout}
-            className="w-full px-3 py-2 rounded-lg bg-red-600 hover:bg-red-700"
-          >
-            🚪 Logout
+          <button onClick={handleLogout} className="w-full px-3 py-2 rounded-lg bg-red-600 hover:bg-red-700">
+            Logout
           </button>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 p-8 overflow-y-auto flex flex-col items-center">
+      {/* Overlay for mobile */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden" onClick={() => setIsOpen(false)}/>
+      )}
+
+      {/* Toggle Button */}
+      <button className="fixed top-0 left-0 p-2 bg-neutral-800 text-white lg:hidden z-5" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? "✖" : "☰"}
+      </button>
+
+
+      <div className="flex-1 p-8 overflow-y-auto flex flex-col items-center ">
         <h1 className="text-3xl font-bold mb-6">Task Calendar</h1>
 
-        {/* Calendar */}
-        <Calendar
-          onChange={(value: Value) => {
+        <Calendar onChange={(value: Value) => {
             if (value instanceof Date) {
               setSelectedDate(value);
             } else if (Array.isArray(value) && value[0] instanceof Date) {
@@ -120,8 +134,8 @@ export default function CalendarPage() {
           }
         />
 
-        {/* Completed tasks for selected day */}
-        <div className="mt-6 w-full max-w-lg bg-white p-4 rounded-lg shadow">
+
+        <div className="mt-6 w-full max-w-lg bg-neutral-600 text-white p-4 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-2">
             Completed Tasks on{" "}
             {selectedDate?.toLocaleDateString(undefined, {
@@ -139,7 +153,7 @@ export default function CalendarPage() {
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500">No tasks completed on this day.</p>
+            <p className="text-gray-400">No tasks completed on this day.</p>
           )}
         </div>
       </div>
