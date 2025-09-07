@@ -166,5 +166,91 @@ app.delete("/api/tasks/:id", authMiddleware, async (req, res) => {
     }
 });
 
+// ===================== NOTES =====================
+
+// Get all notes
+app.get("/api/notes", authMiddleware, async (req, res) => {
+    try {
+        const db = await connectDB();
+        const notes = await db.collection("notes")
+            .find({ userId: new ObjectId(req.user.id) })
+            .sort({ createdAt: -1 })
+            .toArray();
+        res.json(notes);
+    } catch (err) {
+        console.error("Get Notes Error:", err.message);
+        res.status(500).json({ msg: "Server error" });
+    }
+});
+
+// Add a note
+app.post("/api/notes", authMiddleware, async (req, res) => {
+  const { title } = req.body;
+  const newNote = {
+    userId: new ObjectId(req.user.id),
+    title: title || "Untitled Note",
+    content: "",
+    createdAt: new Date(),
+  };
+  await db.collection("notes").insertOne(newNote);
+  res.json(newNote);
+});
+
+
+// Get single note by ID
+app.get("/api/notes/:id", authMiddleware, async (req, res) => {
+    try {
+        const db = await connectDB();
+        const note = await db.collection("notes").findOne({ 
+            _id: new ObjectId(req.params.id),
+            userId: new ObjectId(req.user.id)
+        });
+        if (!note) return res.status(404).json({ msg: "Note not found ❌" });
+        res.json(note);
+    } catch (err) {
+        console.error("Get Note Error:", err.message);
+        res.status(500).json({ msg: "Server error" });
+    }
+});
+
+// Update note (title & content)
+app.put("/api/notes/:id", authMiddleware, async (req, res) => {
+    try {
+        const { title, content } = req.body;
+        const db = await connectDB();
+        const updated = await db.collection("notes").findOneAndUpdate(
+            { _id: new ObjectId(req.params.id), userId: new ObjectId(req.user.id) },
+            { $set: { title, content } },
+            { returnDocument: "after" }
+        );
+        res.json(updated.value);
+    } catch (err) {
+        console.error("Update Note Error:", err.message);
+        res.status(500).json({ msg: "Server error" });
+    }
+});
+
+// delete note
+app.delete("/api/notes/:id", authMiddleware, async (req, res) => {
+    try {
+        const db = await connectDB();
+        const result = await db.collection("notes").deleteOne({
+            _id: new ObjectId(req.params.id),
+            userId: new ObjectId(req.user.id),
+        });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ msg: "Note not found ❌" });
+        }
+
+        res.json({ msg: "Note deleted ✅" });
+    } catch (err) {
+        console.error("Delete Note Error:", err.message);
+        res.status(500).json({ msg: "Server error" });
+    }
+});
+
+
+
 // ================= START SERVER =================
-app.listen(5000, () => console.log("🚀 Server running on port 5000"));
+app.listen(process.env.PORT || 5000, () => console.log("🚀 Server running on port 5000"));

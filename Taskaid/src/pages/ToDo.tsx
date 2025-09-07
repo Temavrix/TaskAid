@@ -137,7 +137,7 @@ export default function ToDo() {
 
 
       <div className="flex flex-col items-center p-8 overflow-y-auto">
-        <h1 className="text-3xl font-bold mb-6">To-Do Page</h1>
+        <h1 className="text-3xl font-bold text-white mb-6">To-Do Page</h1>
 
         <form onSubmit={handleAddTask} className="flex gap-2 mb-6">
           <input type="text" value={newTask} onChange={(e) => setNewTask(e.target.value)} placeholder="Enter a task..." className="p-3 border rounded-lg w-72 bg-white"/>

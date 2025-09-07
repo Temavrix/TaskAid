@@ -18,9 +18,8 @@ Here at Temavrix we are committed in keeping NexaView up-to-date and up-to-speed
 
 ```
 TaskAid Changelogs:-
-1. Mobile Support: Our team at Temavrix have bought native mobile
-   support with the help of TailwindCSS.
-2. Aesthetic improvements.
+1. Added Notes Page to store your notes.
+2. Asthetics Improvements
 
 Code Checks Manifest:-
 All Checks Status: ✅
@@ -29,7 +28,7 @@ UX (User Experience) Checks: ✅
 BackEnd Code-FrontEnd UI Integration Checks: ✅
 (All evaluations are done by the R&D Department)
 
-Last Updated: 31-August-2025 21:00 HRS (Singapore Standard Time)
+Last Updated: 07-September-2025 18:45 HRS (Singapore Standard Time)
 Publisher: Temavrix
 ```
 Keep up-to-date with what's happening on this repository by clicking the 'Star' and 'Watch' button on the top right corner of this webpage.
@@ -54,5 +53,5 @@ Thank you for your kind co-operation :-)
 TaskAid Copyright (C) Temavrix 2025  
 All Rights Reserved
 
-Version 1.0
+Version 1.5
 

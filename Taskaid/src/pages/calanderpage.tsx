@@ -114,7 +114,7 @@ export default function CalendarPage() {
 
 
       <div className="flex-1 p-8 overflow-y-auto flex flex-col items-center ">
-        <h1 className="text-3xl font-bold mb-6">Task Calendar</h1>
+        <h1 className="text-3xl text-white font-bold mb-6">Task Calendar</h1>
 
         <Calendar onChange={(value: Value) => {
             if (value instanceof Date) {
