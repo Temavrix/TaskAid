@@ -11,7 +11,7 @@ export default function LoginPage() {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5000/api/login", { email, password });
+            const res = await axios.post("https://taskaid-backend-8v50.onrender.com/api/login", { email, password });
             localStorage.setItem("token", res.data.token);
             navigate("/ToDo");
         } catch (err: any) {

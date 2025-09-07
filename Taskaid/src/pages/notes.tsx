@@ -23,7 +23,7 @@ export default function Notes() {
   const refreshNotes = async (selectedId?: string) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/notes", {
+      const res = await axios.get("https://taskaid-backend-8v50.onrender.com/api/notes", {
         headers: { Authorization: token || "" },
       });
       setNotes(res.data);
@@ -48,7 +48,7 @@ export default function Notes() {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:5000/api/notes",
+        "https://taskaid-backend-8v50.onrender.com/api/notes",
         { title: newTitle, content: "" },
         { headers: { Authorization: token || "" } }
       );
@@ -72,7 +72,7 @@ export default function Notes() {
       setSaving(true);
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:5000/api/notes/${selectedNote._id}`,
+        `https://taskaid-backend-8v50.onrender.com/api/notes/${selectedNote._id}`,
         { title: selectedNote.title, content: selectedNote.content },
         { headers: { Authorization: token || "" } }
       );
@@ -168,7 +168,7 @@ export default function Notes() {
                   try {
                     const token = localStorage.getItem("token");
                     await axios.delete(
-                      `http://localhost:5000/api/notes/${selectedNote._id}`,
+                      `https://taskaid-backend-8v50.onrender.com/api/notes/${selectedNote._id}`,
                       { headers: { Authorization: token || "" } }
                     );
                     setShowEditor(false);

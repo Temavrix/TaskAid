@@ -10,7 +10,7 @@ export default function Register() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/register", { email, password });
+      const res = await axios.post("https://taskaid-backend-8v50.onrender.com/api/register", { email, password });
       setMessage(res.data.msg || "Registered successfully ✅");
     } catch (err: any) {
       setMessage(err.response?.data?.msg || "Registration failed ❌");

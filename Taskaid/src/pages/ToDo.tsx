@@ -36,7 +36,7 @@ export default function ToDo() {
   // Fetch tasks
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/tasks", {
+      const res = await axios.get("https://taskaid-backend-8v50.onrender.com/api/tasks", {
         headers: { Authorization: token },
       });
       setTasks(res.data);
@@ -51,9 +51,7 @@ export default function ToDo() {
     if (!newTask.trim()) return;
 
     try {
-      await axios.post(
-        "http://localhost:5000/api/tasks",{ title: newTask },{ headers: { Authorization: token } }
-      );
+      await axios.post("https://taskaid-backend-8v50.onrender.com/api/tasks",{ title: newTask },{ headers: { Authorization: token }});
       setNewTask("");
       fetchTasks();
     } catch (err) {
@@ -65,7 +63,7 @@ export default function ToDo() {
   const handleDelete = async (id: string) => {
     try {
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+      await axios.delete(`https://taskaid-backend-8v50.onrender.com/api/tasks/${id}`, {
         headers: { Authorization: token },
       });
       fetchTasks();
@@ -77,7 +75,7 @@ export default function ToDo() {
   // Toggle done/undone
   const handleToggleDone = async (id: string) => {
     try {
-      await axios.put(`http://localhost:5000/api/tasks/${id}/done`,{},{ headers: { Authorization: token } });
+      await axios.put(`https://taskaid-backend-8v50.onrender.com/api/tasks/${id}/done`,{},{ headers: { Authorization: token } });
       fetchTasks();
     } catch (err) {
       console.error(err);
