@@ -1,9 +1,10 @@
 # TaskAid
 
-###### An App Made To Boost Your Productivity And Motivation
+###### An App Made To Boost Your Productivity And Motivate you
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Temavrix/TaskAid) [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/Temavrix/TaskAid) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Temavrix/TaskAid/issues)
 
+## Our Project is now live: [TaskAid](https://taskaid-tvix.onrender.com/)
 
 ## Table Of Contents
 - [What's New?](#whats-new)
@@ -18,8 +19,8 @@ Here at Temavrix we are committed in keeping NexaView up-to-date and up-to-speed
 
 ```
 TaskAid Changelogs:-
-1. Added Notes Page to store your notes.
-2. Asthetics Improvements
+1. Fixed Bugs 
+2. Added Asthetics Improvements
 
 Code Checks Manifest:-
 All Checks Status: ✅
@@ -28,7 +29,7 @@ UX (User Experience) Checks: ✅
 BackEnd Code-FrontEnd UI Integration Checks: ✅
 (All evaluations are done by the R&D Department)
 
-Last Updated: 07-September-2025 18:45 HRS (Singapore Standard Time)
+Last Updated: 13-September-2025 19:45 HRS (Singapore Standard Time)
 Publisher: Temavrix
 ```
 Keep up-to-date with what's happening on this repository by clicking the 'Star' and 'Watch' button on the top right corner of this webpage.

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import '../App.css'
 
 interface Task {
   _id: string;
@@ -104,7 +105,7 @@ export default function ToDo() {
         <div>
           <h2 className="text-2xl font-bold p-4">TaskAid</h2>
           <nav className="flex flex-col gap-2 p-4">
-            <button className="px-3 py-2 rounded-lg bg-neutral-700 hover:bg-neutral-600 text-left">
+            <button className="px-3 py-2 rounded-lg bg-gray-500 text-left">
               To-Dos
             </button>
             <button onClick={handleNotes} className="px-3 py-2 rounded-lg bg-neutral-700 hover:bg-neutral-600 text-left">
@@ -134,7 +135,7 @@ export default function ToDo() {
 
 
 
-      <div className="flex flex-col items-center p-8 overflow-y-auto">
+      <div className="flex flex-col items-center overflow-y-auto">
         <h1 className="text-3xl font-bold text-white mb-6">To-Do Page</h1>
 
         <form onSubmit={handleAddTask} className="flex gap-2 mb-6">
@@ -156,14 +157,14 @@ export default function ToDo() {
           </button>
         </div>
 
-        <ul className="w-96 bg-neutral-600 text-white rounded-lg shadow p-4">
+        <ul className="w-90 bg-neutral-600 overflow-y-auto no-scrollbar text-white rounded-lg shadow">
           {filteredTasks.length > 0 ? (
             filteredTasks.map((task) => (
-              <li key={task._id} className="flex flex-col gap-1 p-5 border-b last:border-b-0">
+              <li key={task._id} className="flex flex-col p-6 mt-2 rounded-xl shadow-md bg-black hover:shadow-lg transition-shadow">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
                     <input type="checkbox" checked={task.done || false} onChange={() => handleToggleDone(task._id)}/>
-                    <span className={task.done ? "line-through text-gray-500" : ""}>
+                    <span className={task.done ? "line-through text-gray-300" : ""}>
                       {task.title}
                     </span>
                   </div>
@@ -172,10 +173,10 @@ export default function ToDo() {
                   </button>
                 </div>
                 {task.done && task.completedAt && (
-                  <p className="text-xs text-green-600 ml-7">
-                    ✅ Completed on{" "}
-                    {new Date(task.completedAt).toLocaleString()}</p>)}
-                  </li>
+                <p className="text-xs text-green-600 ml-7">
+                  ✅ Completed on{" "}
+                  {new Date(task.completedAt).toLocaleString()}</p>)}
+              </li>
             ))) : (<p className="text-gray-400 text-center">No tasks yet</p>)}
         </ul>
       </div>

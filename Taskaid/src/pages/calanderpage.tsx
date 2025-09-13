@@ -90,7 +90,7 @@ export default function CalendarPage() {
             <button onClick={handleNotes} className="px-3 py-2 rounded-lg bg-neutral-700 hover:bg-neutral-600 text-left">
               Notes
             </button>
-            <button className="px-3 py-2 rounded-lg bg-neutral-700 hover:bg-neutral-600 text-left">
+            <button className="px-3 py-2 rounded-lg bg-gray-500 text-left">
               Calendar
             </button>
           </nav>
@@ -113,7 +113,7 @@ export default function CalendarPage() {
       </button>
 
 
-      <div className="flex-1 p-8 overflow-y-auto flex flex-col items-center ">
+      <div className="flex-1 p-7 overflow-y-auto flex flex-col items-center ">
         <h1 className="text-3xl text-white font-bold mb-6">Task Calendar</h1>
 
         <Calendar onChange={(value: Value) => {
@@ -135,7 +135,7 @@ export default function CalendarPage() {
         />
 
 
-        <div className="mt-6 w-full max-w-lg bg-neutral-600 text-white p-4 rounded-lg shadow">
+        <div className="mt-6 w-full max-w-lg text-white p-4">
           <h2 className="text-xl font-semibold mb-2">
             Completed Tasks on{" "}
             {selectedDate?.toLocaleDateString(undefined, {
@@ -147,7 +147,7 @@ export default function CalendarPage() {
           {completedTasksForDay.length > 0 ? (
             <ul className="list-disc pl-5">
               {completedTasksForDay.map((task) => (
-                <li key={task._id} className="text-green-700">
+                <li key={task._id} className="flex flex-col gap-2 p-5 mt-3 rounded-xl text-white bg-emerald-900">
                   {task.title}
                 </li>
               ))}
