@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import "./calander.css"
 
 // react-calendar typings
 type ValuePiece = Date | null;
@@ -20,6 +20,7 @@ export default function CalendarPage() {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [clickedDate, setClickedDate] = useState<string | null>(null); // store clicked day
   const [completedDates, setCompletedDates] = useState<Set<string>>(new Set());
   const [isOpen, setIsOpen] = useState(false);
   const token = localStorage.getItem("token");
@@ -77,7 +78,7 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className="h-screen flex bg-neutral-600">
+    <div className="h-screen flex bg-gray-900">
 
       <div className={`fixed top-0 left-0 h-full bg-neutral-800 text-white flex flex-col justify-between transform transition-transform duration-300 z-40
           ${isOpen ? "translate-x-0 w-64" : "-translate-x-full w-50"} lg:translate-x-0 lg:w-64`}>
@@ -113,25 +114,37 @@ export default function CalendarPage() {
       </button>
 
 
-      <div className="flex-1 p-7 overflow-y-auto flex flex-col items-center ">
+      <div className="flex-1 p-7 lg:ml-50 overflow-y-auto flex flex-col items-center ">
         <h1 className="text-3xl text-white font-bold mb-6">Task Calendar</h1>
 
-        <Calendar onChange={(value: Value) => {
+       <Calendar className="text-1xl custom-calendar" onChange={(value: Value) => {
+            let date: Date | null = null;
             if (value instanceof Date) {
-              setSelectedDate(value);
+              date = value;
             } else if (Array.isArray(value) && value[0] instanceof Date) {
-              setSelectedDate(value[0]); // handle range
+              date = value[0];
+            }
+            if (date) {
+              setSelectedDate(date);
+              setClickedDate(date.toLocaleDateString("en-CA"));
             }
           }}
           value={selectedDate}
           tileContent={({ date, view }) =>
-            view === "month" &&
-            completedDates.has(date.toLocaleDateString("en-CA")) ? (
+            view === "month" && completedDates.has(date.toLocaleDateString("en-CA")) ? (
               <div className="flex justify-center mt-1">
-                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                <div className="w-2 h-2 rounded-full bg-green-700"></div>
               </div>
             ) : null
           }
+          tileClassName={({ date, view }) => {
+            if (view === "month") {
+              const dateStr = date.toLocaleDateString("en-CA");
+              if (clickedDate === dateStr) return "bg-blue-600 text-white rounded";
+              return "bg-black text-white";
+            }
+            return "";
+          }}
         />
 
 
@@ -145,9 +158,9 @@ export default function CalendarPage() {
             })}
           </h2>
           {completedTasksForDay.length > 0 ? (
-            <ul className="list-disc pl-5">
+            <ul className="list-disc">
               {completedTasksForDay.map((task) => (
-                <li key={task._id} className="flex flex-col gap-2 p-5 mt-3 rounded-xl text-white bg-emerald-900">
+                <li key={task._id} className="flex flex-col gap-2 p-5 mt-3 rounded-xl text-white font-bold bg-emerald-900">
                   {task.title}
                 </li>
               ))}

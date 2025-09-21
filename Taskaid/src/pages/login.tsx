@@ -24,7 +24,7 @@ export default function LoginPage() {
             <div className="md:flex flex-col items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-12">
               <h1 className="text-5xl font-bold mb-6">TaskAid</h1>
               <p className="text-lg text-gray-200">
-                Track your tasks efficiently.
+                Track your tasks efficiently....
               </p>
             </div>
 

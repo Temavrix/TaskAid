@@ -87,7 +87,7 @@ export default function Notes() {
   };
 
   return (
-    <div className="h-screen flex bg-neutral-600">
+    <div className="h-screen flex bg-gray-900">
       <div className={`fixed top-0 left-0 h-full bg-neutral-800 text-white flex flex-col justify-between transform transition-transform duration-300 z-40
           ${isOpen ? "translate-x-0 w-64" : "-translate-x-full w-50"} lg:translate-x-0 lg:w-64`}>
         <div>
@@ -132,7 +132,7 @@ export default function Notes() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {notes.map((note) => (
-            <div key={note._id} onClick={() => handleOpenNote(note)} className="bg-gray-800 p-10 rounded-lg shadow hover:bg-neutral-600 cursor-pointer" >
+            <div key={note._id} onClick={() => handleOpenNote(note)} className="bg-yellow-800 p-10 rounded-lg shadow hover:bg-yellow-700 cursor-pointer" >
               <h2 className="text-lg font-semibold">{note.title}</h2>
               <p className="text-sm text-gray-300">
                 {note.createdAt ? new Date(note.createdAt).toLocaleDateString(): ""}
@@ -142,13 +142,13 @@ export default function Notes() {
         </div>
       </div>
 
-      <div className={`fixed top-0 right-0 h-full w-96 bg-neutral-800 text-white transform transition-transform duration-300 shadow-lg z-40 ${showEditor ? "translate-x-0" : "translate-x-full"}`}>
+      <div className={`fixed top-0 right-0 h-full w-96 bg-gray-800 text-white transform transition-transform duration-300 shadow-lg z-40 ${showEditor ? "translate-x-0" : "translate-x-full"}`}>
         {selectedNote && (
           <div className="flex flex-col h-full p-6">
             <h2 className="text-xl font-bold mb-4">Edit Note</h2>
-            <input type="text" value={selectedNote.title} onChange={(e) => setSelectedNote({ ...selectedNote, title: e.target.value })} className="p-2 rounded-lg mb-4 text-white"/>
+            <input type="text" value={selectedNote.title} onChange={(e) => setSelectedNote({ ...selectedNote, title: e.target.value })} className="p-2 rounded-lg mb-4 bg-neutral-900 font-bold text-white"/>
             <textarea value={selectedNote.content || ""} onChange={(e) => setSelectedNote({ ...selectedNote, content: e.target.value })}
-              className="flex-1 p-3 rounded-lg text-white resize-none" placeholder="Write your note..."/>
+              className="flex-1 p-3 bg-neutral-900 rounded-lg text-white font-bold resize-none" placeholder="Write your note..."/>
             <div className="flex justify-between mt-4 gap-2">
               <button onClick={() => setShowEditor(false)} className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg" >
                 Close

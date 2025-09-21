@@ -1,0 +1,48 @@
+/* Dark mode calendar */
+.custom-calendar {
+  background-color: #1f1f1f; /* dark background */
+  color: white;
+  border-radius: 8px;
+  width: 500px;
+  padding: 10px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .custom-calendar {
+    width: 95%;        /* almost full width on small screens */
+    padding: 8px;      /* slightly smaller padding */
+    font-size: 14px;   /* smaller font if needed */
+  }
+}
+
+.custom-calendar .react-calendar__tile {
+  border-radius: 4px;
+  height: 90px;
+}
+
+.custom-calendar .react-calendar__tile:hover {
+  background-color: #374151; /* hover effect */
+}
+
+/* Custom navigation spacing */
+.custom-calendar .react-calendar__navigation {
+  display: flex;
+  justify-content: center; /* center the month label */
+  align-items: center;
+  gap: 12px; /* space between buttons and label */
+  margin-bottom: 12px; /* optional space below navigation */
+}
+
+.custom-calendar .react-calendar__navigation button {
+  padding: 6px 10px; /* make buttons bigger and easier to click */
+  margin: 0; /* remove default margins */
+  border-radius: 4px;
+  background-color: #111827; /* dark mode */
+  color: white;
+  border: none;
+}
+
+.custom-calendar .react-calendar__navigation button:hover {
+  background-color: #2563eb; /* highlight on hover */
+}
