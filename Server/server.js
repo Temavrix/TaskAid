@@ -1,10 +1,13 @@
 // server.js
-const express = require("express");
-const cors = require("cors");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { MongoClient, ObjectId } = require("mongodb");
-require("dotenv").config({ path: "config.env" });
+import express from "express";
+import fetch from "node-fetch";
+import cors from "cors";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { MongoClient, ObjectId } from "mongodb";
+import dotenv from "dotenv";
+dotenv.config({ path: "config.env" });
+
 
 const app = express();
 app.use(cors());
@@ -44,6 +47,28 @@ function authMiddleware(req, res, next) {
         return res.status(401).json({ msg: "Token is not valid" });
     }
 }
+
+// ===================== NEXAVIEW =====================
+app.get("/api/news", async (req, res) => {
+  try {
+    const { apikey, category = "business", country = "us" } = req.query;
+
+    if (!apikey) {
+      return res.status(400).json({ error: "Missing API key" });
+    }
+
+    const url = `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&country=${country}&max=100&apikey=${apikey}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    res.json(data);
+  } catch (err) {
+    console.error("Error fetching news:", err);
+    res.status(500).json({ error: "Failed to fetch news" });
+  }
+});
+
+
 
 // ===================== REGISTER =====================
 app.post("/api/register", async (req, res) => {
